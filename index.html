@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Lecteur vidéo</title>
+<style>
+  body {
+    background-color: #000;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  video {
+    width: 80%;
+    max-width: 900px;
+    border: 2px solid #555;
+    border-radius: 10px;
+  }
+  h2 {
+    font-family: sans-serif;
+    color: #ccc;
+  }
+</style>
+</head>
+<body>
+
+<h2 id="title">Chargement de la vidéo...</h2>
+<video id="player" controls autoplay>
+  Votre navigateur ne supporte pas la lecture vidéo.
+</video>
+
+<script>
+  // Récupère le nom de la vidéo depuis l’URL (ex: ?video=test.mp4)
+  const params = new URLSearchParams(window.location.search);
+  const videoName = params.get("video");
+
+  const player = document.getElementById("player");
+  const title = document.getElementById("title");
+
+  if (videoName) {
+    player.src = videoName;
+    title.textContent = "Lecture de : " + videoName;
+  } else {
+    title.textContent = "Aucune vidéo spécifiée";
+  }
+</script>
+
+</body>
+</html>
