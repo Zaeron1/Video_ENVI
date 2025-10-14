@@ -3,61 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lecture vidéo</title>
+  <title>Vidéo</title>
   <style>
-    /* --- Style sobre et professionnel --- */
+    /* --- Mise en page globale --- */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #0e0e0e;
-      color: #ccc;
+      width: 100%;
+      background-color: #0b0c0f;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+    }
+
+    /* --- Conteneur principal --- */
+    .video-wrapper {
+      width: 92%;
+      max-width: 1600px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 10px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     iframe {
-      width: 80%;
-      max-width: 1000px;
-      height: 56.25%; /* ratio 16:9 */
-      aspect-ratio: 16 / 9;
+      width: 100%;
+      height: 100%;
       border: none;
-      border-radius: 8px;
-      background-color: #000;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+      background: #000;
     }
 
+    /* --- Message d’erreur ou d’attente --- */
     #error {
-      color: #888;
-      font-size: 1rem;
+      position: absolute;
+      color: #999;
+      font-size: 1.2rem;
       text-align: center;
       padding: 20px;
+    }
+
+    /* --- Barre subtile autour (effet de cadre discret) --- */
+    .video-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid #2e2e2e;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 800px) {
+      .video-wrapper {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div id="container">
+  <div class="video-wrapper">
     <iframe id="player" allow="autoplay"></iframe>
-    <div id="error" hidden>❌ Aucune vidéo spécifiée.  
-    Utilise un lien avec <code>?id=</code> suivi de l’ID Google Drive.</div>
+    <div id="error" hidden>❌ Aucune vidéo spécifiée.<br>Ajoute <code>?id=</code> dans l’URL.</div>
   </div>
 
   <script>
-    // Récupère le paramètre ?id= dans l’URL
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get("id");
     const player = document.getElementById("player");
     const error = document.getElementById("error");
 
     if (videoId) {
-      // Affiche la vidéo Drive correspondante
       player.src = `https://drive.google.com/file/d/${videoId}/preview`;
     } else {
-      // Aucun ID fourni
       player.style.display = "none";
       error.hidden = false;
     }
