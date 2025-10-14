@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>🎥 Vidéo ENVI</title>
+
+<style>
+  /* --- Style général --- */
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top, #111 0%, #000 80%);
+    color: #eee;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* --- Titre --- */
+  h1 {
+    color: #ddd;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 1.5em;
+    text-shadow: 0 0 10px #09f;
+    font-size: 1.6em;
+  }
+
+  /* --- Lecteur vidéo --- */
+  video {
+    width: 80%;
+    max-width: 1000px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
+    outline: none;
+  }
+
+  /* --- Bouton retour --- */
+  a {
+    margin-top: 2em;
+    color: #09f;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: 0.2s;
+  }
+  a:hover {
+    color: #6cf;
+    text-shadow: 0 0 8px #09f;
+  }
+
+  /* --- Effet d’apparition --- */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  h1, video, a {
+    animation: fadeIn 1s ease-in-out;
+  }
+</style>
+</head>
+
+<body>
+
+  <h1>Lecture de la vidéo : <span style="color:#09f;">test.mp4</span></h1>
+
+  <video controls autoplay>
+    <source src="test.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la lecture vidéo.
+  </video>
+
+  <a href="https://zaeron1.github.io/Video_ENVI/">⏎ Retour aux vidéos</a>
+
+</body>
+</html>
