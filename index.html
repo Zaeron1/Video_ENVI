@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture vidéo</title>
+  <style>
+    /* --- Style sobre et professionnel --- */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #0e0e0e;
+      color: #ccc;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    iframe {
+      width: 80%;
+      max-width: 1000px;
+      height: 56.25%; /* ratio 16:9 */
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: 8px;
+      background-color: #000;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    }
+
+    #error {
+      color: #888;
+      font-size: 1rem;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container">
+    <iframe id="player" allow="autoplay"></iframe>
+    <div id="error" hidden>❌ Aucune vidéo spécifiée.  
+    Utilise un lien avec <code>?id=</code> suivi de l’ID Google Drive.</div>
+  </div>
+
+  <script>
+    // Récupère le paramètre ?id= dans l’URL
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get("id");
+    const player = document.getElementById("player");
+    const error = document.getElementById("error");
+
+    if (videoId) {
+      // Affiche la vidéo Drive correspondante
+      player.src = `https://drive.google.com/file/d/${videoId}/preview`;
+    } else {
+      // Aucun ID fourni
+      player.style.display = "none";
+      error.hidden = false;
+    }
+  </script>
+
+</body>
+</html>
