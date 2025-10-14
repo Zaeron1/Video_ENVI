@@ -5,33 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vidéo</title>
   <style>
-    /* --- Mise en page globale --- */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       width: 100%;
       background-color: #0b0c0f;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
 
-    /* --- Conteneur principal --- */
     .video-wrapper {
-      width: 92%;
-      max-width: 1600px;
-      aspect-ratio: 16 / 9;
+      width: 95%;
+      height: 95%;
+      max-width: 1800px;
+      max-height: 95vh;
       background: #000;
-      border-radius: 10px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
       overflow: hidden;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
 
     iframe {
@@ -41,45 +37,21 @@
       background: #000;
     }
 
-    /* --- Message d’erreur ou d’attente --- */
     #error {
       position: absolute;
       color: #999;
-      font-size: 1.2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 1.1rem;
       text-align: center;
       padding: 20px;
     }
-
-    /* --- Barre subtile autour (effet de cadre discret) --- */
-    .video-wrapper::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 1px solid #2e2e2e;
-      border-radius: 10px;
-      pointer-events: none;
-    }
-
-    /* --- Responsive --- */
-    @media (max-width: 800px) {
-      .video-wrapper {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        box-shadow: none;
-      }
-    }
   </style>
 </head>
-
 <body>
 
   <div class="video-wrapper">
-    <iframe id="player" allow="autoplay"></iframe>
-    <div id="error" hidden>❌ Aucune vidéo spécifiée.<br>Ajoute <code>?id=</code> dans l’URL.</div>
+    <iframe id="player" allow="autoplay; fullscreen"></iframe>
+    <div id="error" hidden>Aucune vidéo spécifiée. Ajoute ?id= dans l’URL.</div>
   </div>
 
   <script>
